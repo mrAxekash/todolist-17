@@ -7,7 +7,7 @@ import { AppRootStateType } from "./store";
 import { initializeAppTC, RequestStatusType } from "./app-reducer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "features/Login/Login";
-import { logoutTC } from "features/Login/auth-reducer";
+import { logoutTC } from "features/Login/authSlice";
 import {
   AppBar,
   Button,
