@@ -4,12 +4,6 @@ import { authActions } from "features/Login/authSlice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "app/store";
 
-export type InitialStateType = {
-  status: RequestStatusType;
-  error: string | null;
-  isInitialized: boolean;
-};
-
 const slice = createSlice({
   name: "app",
   initialState: {
@@ -30,14 +24,10 @@ const slice = createSlice({
   },
 });
 
-export const appReducer = slice.reducer;
+export const appSlice = slice.reducer;
 export const appActions = slice.actions;
+export type AppState = ReturnType<typeof slice.getInitialState>;
 
-const initialState: InitialStateType = {
-  status: "idle",
-  error: null,
-  isInitialized: false,
-};
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
 export const initializeAppTC = (): AppThunk => (dispatch) => {
