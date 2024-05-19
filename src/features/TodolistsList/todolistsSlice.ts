@@ -2,7 +2,7 @@ import { todolistsAPI, TodolistType } from "api/todolists-api";
 import { appActions, RequestStatusType } from "app/appSlice";
 import { handleServerNetworkError } from "utils/error-utils";
 import { AppThunk } from "app/store";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: Array<TodolistDomainType> = [];
 
@@ -11,12 +11,10 @@ const slice = createSlice({
   initialState: [] as TodolistDomainType[],
   reducers: {
     removeTodolist: (state, action: PayloadAction<{ id: string }>) => {
-      //return state.filter((tl) => tl.id != action.id);
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       if (index !== -1) state.splice(index, 1);
     },
     addTodolist: (state, action: PayloadAction<{ todolist: TodolistType }>) => {
-      //return [{ ...action.todolist, filter: "all", entityStatus: "idle" }, ...state];
       state.unshift({ ...action.payload.todolist, filter: "all", entityStatus: "idle" });
     },
     changeTodolistTitle: (state, action: PayloadAction<{ id: string; title: string }>) => {
@@ -71,14 +69,14 @@ export const fetchTodolistsTC = (): AppThunk => {
       });
   };
 };
-export const removeTodolistTC = (todolistId: string): AppThunk => {
+export const removeTodolistTC = (id: string): AppThunk => {
   return (dispatch) => {
     //изменим глобальный статус приложения, чтобы вверху полоса побежала
     dispatch(appActions.setAppStatus({ status: "loading" }));
     //изменим статус конкретного тудулиста, чтобы он мог задизеблить что надо
-    dispatch(todolistsActions.changeTodolistEntityStatus({ entityStatus: "loading", id: todolistId }));
-    todolistsAPI.deleteTodolist(todolistId).then((res) => {
-      dispatch(todolistsActions.removeTodolist({ id: todolistId }));
+    dispatch(todolistsActions.changeTodolistEntityStatus({ entityStatus: "loading", id }));
+    todolistsAPI.deleteTodolist(id).then((res) => {
+      dispatch(todolistsActions.removeTodolist({ id }));
       //скажем глобально приложению, что асинхронная операция завершена
       dispatch(appActions.setAppStatus({ status: "succeeded" }));
     });

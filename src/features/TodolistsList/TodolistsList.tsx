@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { AppRootStateType } from "app/store";
 import {
   addTodolistTC,
-  changeTodolistFilterAC,
   changeTodolistTitleTC,
   fetchTodolistsTC,
   FilterValuesType,
   removeTodolistTC,
   TodolistDomainType,
+  todolistsActions,
 } from "features/TodolistsList/todolistsSlice";
 import { addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from "./tasks-reducer";
 import { TaskStatuses } from "api/todolists-api";
@@ -58,7 +58,7 @@ export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
   }, []);
 
   const changeFilter = useCallback(function (value: FilterValuesType, todolistId: string) {
-    const action = changeTodolistFilterAC(todolistId, value);
+    const action = todolistsActions.changeTodolistFilter({ filter: value, id: todolistId });
     dispatch(action);
   }, []);
 
