@@ -4,7 +4,7 @@ import { handleServerNetworkError } from "utils/error-utils";
 import { AppThunk } from "app/store";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: Array<TodolistDomainType> = [];
+// const initialState: Array<TodolistDomainType> = [];
 
 const slice = createSlice({
   name: "todolists",
@@ -47,6 +47,9 @@ const slice = createSlice({
       action.payload.todolists.forEach((tl) => {
         state.push({ ...tl, filter: "all", entityStatus: "idle" });
       });
+    },
+    clearTodolistState: (state, action: PayloadAction<{}>) => {
+      return (state = []);
     },
   },
 });

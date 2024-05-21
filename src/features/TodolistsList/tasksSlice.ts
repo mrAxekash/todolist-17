@@ -50,11 +50,14 @@ const slice = createSlice({
         action.payload.todolists.forEach((tl) => {
           state[tl.id] = [];
         });
+      })
+      .addCase(todolistsActions.clearTodolistState, (state, action) => {
+        return (state = {});
       });
   },
 });
 
-export const tasksReducer = slice.reducer;
+export const tasksSlice = slice.reducer;
 export const tasksActions = slice.actions;
 
 // thunks
