@@ -19,8 +19,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { selectAppStatus, selectIsInitialized } from "app/appSelectors";
-import { selectSetIsLoggedIn } from "features/Login/authSelectors";
+import { selectAppStatus, selectIsInitialized } from "app/app.selectors";
+import { selectSetIsLoggedIn } from "features/Login/auth.selectors";
 
 type PropsType = {
   demo?: boolean;

@@ -5,7 +5,7 @@ import { loginTC } from "features/Login/authSlice";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField } from "@mui/material";
-import { selectSetIsLoggedIn } from "features/Login/authSelectors";
+import { selectSetIsLoggedIn } from "features/Login/auth.selectors";
 
 export const Login = () => {
   const dispatch = useAppDispatch();

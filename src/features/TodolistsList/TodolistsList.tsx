@@ -17,17 +17,17 @@ import { AddItemForm } from "components/AddItemForm/AddItemForm";
 import { Todolist } from "./Todolist/Todolist";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/useAppDispatch";
-import { selectSetIsLoggedIn } from "features/Login/authSelectors";
-import { selectTodolists } from "features/TodolistsList/selectTodolists";
-import { selectTasks } from "features/TodolistsList/selectTasks";
+import { selectSetIsLoggedIn } from "features/Login/auth.selectors";
+import { todolistsSelectors } from "features/TodolistsList/todolists.selectors";
+import { tasksSelectors } from "features/TodolistsList/tasks.selectors";
 
 type PropsType = {
   demo?: boolean;
 };
 
 export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
-  const todolists = useSelector(selectTodolists);
-  const tasks = useSelector(selectTasks);
+  const todolists = useSelector(todolistsSelectors);
+  const tasks = useSelector(tasksSelectors);
   const isLoggedIn = useSelector(selectSetIsLoggedIn);
 
   const dispatch = useAppDispatch();

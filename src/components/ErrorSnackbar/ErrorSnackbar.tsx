@@ -4,7 +4,7 @@ import { AppRootStateType } from "app/store";
 import { AlertProps, Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { appActions } from "app/appSlice";
-import { selectAppError } from "app/appSelectors";
+import { selectAppError } from "app/app.selectors";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
