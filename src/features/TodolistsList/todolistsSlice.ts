@@ -3,6 +3,7 @@ import { appActions, RequestStatusType } from "app/appSlice";
 import { handleServerNetworkError } from "utils/error-utils";
 import { AppThunk } from "app/store";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { clearTasksAndTodolists } from "common/actions/common.actions";
 
 // const initialState: Array<TodolistDomainType> = [];
 
@@ -48,9 +49,14 @@ const slice = createSlice({
         state.push({ ...tl, filter: "all", entityStatus: "idle" });
       });
     },
-    clearTodolistState: (state, action: PayloadAction<{}>) => {
-      return (state = []);
-    },
+    // clearTodolistState: () => {
+    //   return [];
+    // },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(clearTasksAndTodolists, (state, action) => {
+      return action.payload.todolists;
+    });
   },
 });
 

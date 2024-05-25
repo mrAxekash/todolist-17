@@ -4,6 +4,7 @@ import { appActions } from "app/appSlice";
 import { handleServerAppError, handleServerNetworkError } from "utils/error-utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { todolistsActions } from "features/TodolistsList/todolistsSlice";
+import { clearTasksAndTodolists } from "common/actions/common.actions";
 
 const slice = createSlice({
   name: "tasks",
@@ -51,8 +52,11 @@ const slice = createSlice({
           state[tl.id] = [];
         });
       })
-      .addCase(todolistsActions.clearTodolistState, (state, action) => {
-        return (state = {});
+      // .addCase(todolistsActions.clearTodolistState, () => {
+      //   return {};
+      // });
+      .addCase(clearTasksAndTodolists, (state, action) => {
+        return action.payload.tasks;
       });
   },
 });
