@@ -55,8 +55,8 @@ const slice = createSlice({
       // .addCase(todolistsActions.clearTodolistState, () => {
       //   return {};
       // });
-      .addCase(clearTasksAndTodolists, (state, action) => {
-        return action.payload.tasks;
+      .addCase(clearTasksAndTodolists, () => {
+        return {};
       });
   },
 });
@@ -78,7 +78,7 @@ export const fetchTasksTC =
 export const removeTaskTC =
   (taskId: string, todolistId: string): AppThunk =>
   (dispatch) => {
-    todolistsAPI.deleteTask(todolistId, taskId).then((res) => {
+    todolistsAPI.deleteTask(todolistId, taskId).then(() => {
       const action = tasksActions.removeTask({ taskId, todolistId });
       dispatch(action);
     });
